@@ -12,7 +12,7 @@ class App extends React.Component {
       gender: 'male',
       age: 21,
       symptoms: [],
-      evidence: []
+      first_hit: false
     }
   }
   componentDidMount(){
@@ -31,46 +31,31 @@ class App extends React.Component {
       })
     });
   }
-  symptomSelected = (data)=>{
-    console.log(data)
-    if(this.state.evidence.length == 0) this.getDiagnosis(data)
-  }
-  getDiagnosis = (item)=>{
-    let header = {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-      "App-Id": this.api_data.id,
-      "App-Key": this.api_data.key,
-      "Dev-Mode" : "true"
-    }
-    let evidence = []
-    if(this.state.evidence.length == 0){
-      evidence.push({
-        "id": item.id,
-        "choice_id": "present"
+  symptomSelected = (item)=>{
+    console.log(item)
+    if(!this.state.first_hit) {
+      this.setState({
+        first_hit: true
+      })
+      let local_evidence = [{"id": item.id, "choice_id": "present"}]
+      let header = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "App-Id": this.api_data.id,
+        "App-Key": this.api_data.key,
+        "Dev-Mode" : "true"
+      }
+      axios.post('https://api.infermedica.com/v2/diagnosis', {
+        "sex": this.state.gender,
+        "age": this.state.age,
+        "evidence": local_evidence
+      }, {
+        headers: header
+      }).then(res=>{
+        console.log(this.state.first_hit)
+        console.log(res.data)
       })
     }
-    else{
-      // TODO
-    }
-    this.setState({
-      evidence: evidence
-    })
-    let header_2 = {
-      "sex": this.state.gender,
-      "age": this.state.age,
-      "evidence": this.state.evidence
-    }
-    axios.post('https://api.infermedica.com/v2/diagnosis', {
-      "sex": this.state.gender,
-      "age": this.state.age,
-      "evidence": this.state.evidence
-    }, {
-      headers: header
-    }).then(res=>{
-      console.log(res.data)
-      console.log(evidence)
-    })
   }
   render(){
     return (
