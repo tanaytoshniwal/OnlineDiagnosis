@@ -57,6 +57,20 @@ class App extends React.Component {
       })
     }
   }
+  onSexChanged = (event) => {
+    if(this.state.gender !== event.target.value){
+    this.setState({
+      gender: event.target.value
+    })
+    console.log(this.state.gender)
+  }
+  }
+  onAgeChanged = (event) => {
+    this.setState({
+      age: event.target.value
+    })
+    console.log(this.state.age)
+  }
   render(){
     return (
       <div>
