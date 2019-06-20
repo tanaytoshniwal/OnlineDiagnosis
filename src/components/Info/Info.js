@@ -11,10 +11,10 @@ function Info(props) {
                     </div>
                     <div className="col">
                         <div>
-                            <Form.Check type="radio" name="gender" value="male" label="Male" />
+                            <Form.Check type="radio" checked={props.gender === "male"} onChange={props.onSexChanged} name="gender" value="male" label="Male" />
                         </div>
                         <div>
-                            <Form.Check type="radio" name="gender" value="female" label="Female" />
+                            <Form.Check type="radio" checked={props.gender === "female"} onChange={props.onSexChanged} name="gender" value="female" label="Female" />
                         </div>
                     </div>
                 </div>

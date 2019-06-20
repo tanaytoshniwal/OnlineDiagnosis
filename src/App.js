@@ -64,7 +64,6 @@ class App extends React.Component {
     this.setState({
       gender: event.target.value
     })
-    console.log(this.state.gender)
   }
   onAgeChanged = (event) => {
     this.setState({
@@ -75,7 +74,7 @@ class App extends React.Component {
   render(){
     return (
       <div>
-        <Info sex={this.state.gender} age={this.state.age} onAgeChanged={this.onAgeChanged} submit={this.submit} />
+        <Info sex={this.state.gender} gender={this.state.gender} age={this.state.age} onAgeChanged={this.onAgeChanged} onSexChanged={this.onSexChanged} submit={this.submit} />
         <UI symptoms={this.state.symptoms} selected={this.symptomSelected}/>
       </div>
     );
