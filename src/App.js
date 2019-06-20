@@ -57,6 +57,9 @@ class App extends React.Component {
       })
     }
   }
+  submit = ()=>{
+    console.log('submit')
+  }
   onSexChanged = (event) => {
     if(this.state.gender !== event.target.value){
     this.setState({
@@ -74,7 +77,7 @@ class App extends React.Component {
   render(){
     return (
       <div>
-        <Info sex={this.state.gender} age={this.state.age} />
+        <Info sex={this.state.gender} age={this.state.age} submit={this.submit} />
         <UI symptoms={this.state.symptoms} selected={this.symptomSelected}/>
       </div>
     );

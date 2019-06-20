@@ -1,5 +1,6 @@
 import React from 'react'
 import {Form, Button, Container} from 'react-bootstrap'
+import './Info.css'
 function Info(props) {
     return (
         <div>
@@ -24,6 +25,9 @@ function Info(props) {
                     <div className="col">
                         <Form.Control type="number" onChange={props.onAgeChanged} placeholder="Enter Age" />
                     </div>
+                </div>
+                <div className="row my-2">
+                    <Button onClick={()=>{props.submit()}} type="primary" className="full">Submit</Button>
                 </div>
             </Container>
         </div>
