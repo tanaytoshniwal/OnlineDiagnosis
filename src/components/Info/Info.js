@@ -1,6 +1,6 @@
 import React from 'react'
 import {Form, Button, Container} from 'react-bootstrap'
-function Info() {
+function Info(props) {
     return (
         <div>
             <Container>
@@ -10,10 +10,10 @@ function Info() {
                     </div>
                     <div className="col">
                         <div>
-                            <Form.Check type="checkbox" label="Male" />
+                            <Form.Check type="radio" name="gender" value="male" label="Male" />
                         </div>
                         <div>
-                            <Form.Check type="checkbox" label="Female" />
+                            <Form.Check type="radio" name="gender" value="female" label="Female" />
                         </div>
                     </div>
                 </div>
@@ -22,7 +22,7 @@ function Info() {
                         <Form.Label>Enter Age:</Form.Label>
                     </div>
                     <div className="col">
-                        <Form.Control type="number" placeholder="Enter Age" />
+                        <Form.Control type="number" onChange={props.onAgeChanged} placeholder="Enter Age" />
                     </div>
                 </div>
             </Container>
