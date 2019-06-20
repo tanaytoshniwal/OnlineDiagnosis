@@ -12,8 +12,7 @@ class App extends React.Component {
       gender: 'male',
       age: 0,
       symptoms: [],
-      evidence: [],
-      first_hit: false
+      evidence: []
     }
   }
   componentDidMount(){
@@ -32,35 +31,29 @@ class App extends React.Component {
       })
     });
   }
-  symptomSelected = (item)=>{
-      let local_evidence = {"id": item.id, "choice_id": "present"}
-      this.state.evidence.push(local_evidence)
-      // console.log(this.state.evidence)
+  symptomSelected = (item, index)=>{
+    this.state.symptoms.splice(index, 1)
+    this.setState({symptoms: this.state.symptoms})
+    let local_evidence = {"id": item.id, "choice_id": "present"}
+    this.state.evidence.push(local_evidence)
   }
   submit = ()=>{
-    console.log('submit')
-    if(!this.state.first_hit) {
-      this.setState({
-        first_hit: true
-      })
-      let header = {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "App-Id": this.api_data.id,
-        "App-Key": this.api_data.key,
-        "Dev-Mode" : "true"
-      }
-      axios.post('https://api.infermedica.com/v2/diagnosis', {
-        "sex": this.state.gender,
-        "age": this.state.age,
-        "evidence": this.state.evidence
-      }, {
-        headers: header
-      }).then(res=>{
-        console.log(this.state.first_hit)
-        console.log(res.data)
-      })
+    let header = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "App-Id": this.api_data.id,
+      "App-Key": this.api_data.key,
+      "Dev-Mode" : "true"
     }
+    axios.post('https://api.infermedica.com/v2/diagnosis', {
+      "sex": this.state.gender,
+      "age": this.state.age,
+      "evidence": this.state.evidence
+    }, {
+      headers: header
+    }).then(res=>{
+      console.log(res.data)
+    })
   }
   onSexChanged = (event) => {
     this.setState({
