@@ -12,6 +12,7 @@ class App extends React.Component {
       gender: 'male',
       age: 0,
       symptoms: [],
+      evidence: [],
       first_hit: false
     }
   }
@@ -32,12 +33,16 @@ class App extends React.Component {
     });
   }
   symptomSelected = (item)=>{
-    console.log(item)
+      let local_evidence = {"id": item.id, "choice_id": "present"}
+      this.state.evidence.push(local_evidence)
+      // console.log(this.state.evidence)
+  }
+  submit = ()=>{
+    console.log('submit')
     if(!this.state.first_hit) {
       this.setState({
         first_hit: true
       })
-      let local_evidence = [{"id": item.id, "choice_id": "present"}]
       let header = {
         "Content-Type": "application/json",
         "Accept": "application/json",
@@ -48,7 +53,7 @@ class App extends React.Component {
       axios.post('https://api.infermedica.com/v2/diagnosis', {
         "sex": this.state.gender,
         "age": this.state.age,
-        "evidence": local_evidence
+        "evidence": this.state.evidence
       }, {
         headers: header
       }).then(res=>{
@@ -56,9 +61,6 @@ class App extends React.Component {
         console.log(res.data)
       })
     }
-  }
-  submit = ()=>{
-    console.log('submit')
   }
   onSexChanged = (event) => {
     this.setState({
