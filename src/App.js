@@ -10,7 +10,7 @@ class App extends React.Component {
     super()
     this.state = {
       gender: 'male',
-      age: 21,
+      age: 0,
       symptoms: [],
       first_hit: false
     }
@@ -57,6 +57,9 @@ class App extends React.Component {
       })
     }
   }
+  submit = ()=>{
+    console.log('submit')
+  }
   onSexChanged = (event) => {
     this.setState({
       gender: event.target.value
@@ -72,7 +75,7 @@ class App extends React.Component {
   render(){
     return (
       <div>
-        <Info sex={this.state.gender} age={this.state.age} />
+        <Info sex={this.state.gender} age={this.state.age} onAgeChanged={this.onAgeChanged} submit={this.submit} />
         <UI symptoms={this.state.symptoms} selected={this.symptomSelected}/>
       </div>
     );
