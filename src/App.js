@@ -10,12 +10,10 @@ class App extends React.Component {
     }
   }
   onSexChanged = (event) => {
-    if(this.state.gender !== event.target.value){
     this.setState({
       gender: event.target.value
     })
     console.log(this.state.gender)
-  }
   }
   onAgeChanged = (event) => {
     this.setState({
@@ -26,7 +24,7 @@ class App extends React.Component {
   render(){
     return (
       <div>
-        <Info onAgeChanged={this.onAgeChanged} onSexChanged={this.onSexChanged} state={this.state}/>
+        <Info onAgeChanged={this.onAgeChanged} onSexChanged={this.onSexChanged}/>
       </div>
     );
   }
