@@ -26,8 +26,9 @@ function Info(props) {
                         <Form.Control type="number" onChange={props.onAgeChanged} placeholder="Enter Age" value={props.age} />
                     </div>
                 </div>
-                <div className="row my-2">
-                    <Button onClick={()=>{props.submit()}} type="primary" className="full">Submit</Button>
+                <div className="row my-2 justify-content-around">
+                    <Button onClick={()=>{props.submit()}} type="primary" className="full mx-3">Submit</Button>
+                    <Button onClick={()=>{props.reset()}} type="primary" className="full mx-3">Reset</Button>
                 </div>
             </Container>
         </div>

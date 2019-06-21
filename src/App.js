@@ -107,6 +107,11 @@ class App extends React.Component {
       })
     })
   }
+  reset = () =>{
+    this.setState({
+      evidence: []
+    })
+  }
   onSexChanged = (event) => {
     this.setState({
       gender: event.target.value
@@ -120,7 +125,7 @@ class App extends React.Component {
   render(){
     return (
       <div>
-        <Info sex={this.state.gender} gender={this.state.gender} age={this.state.age} onAgeChanged={this.onAgeChanged} onSexChanged={this.onSexChanged} submit={this.submit} />
+        <Info sex={this.state.gender} reset={this.reset} gender={this.state.gender} age={this.state.age} onAgeChanged={this.onAgeChanged} onSexChanged={this.onSexChanged} submit={this.submit} />
         <UI symptoms={this.state.symptoms} selected={this.symptomSelected}/>
         <Modal
             isOpen={this.state.modalIsOpen}
