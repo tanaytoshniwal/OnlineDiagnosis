@@ -13,8 +13,8 @@ class App extends React.Component {
   customStyles = {
     content : {
       backgroundColor : 'rgba(240, 240, 240, .95)',
-      height : '50%',
-      width: '50%',
+      minHeight : '50%',
+      minWidth: '80%',
       top: '50%',
       left: '50%',
       transform: 'translate(-50%, -50%)'
