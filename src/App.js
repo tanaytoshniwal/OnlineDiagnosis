@@ -84,8 +84,28 @@ class App extends React.Component {
     this.setState({modalIsOpen: false});
   }
   click = (choice_id, id)=>{
-    console.log(choice_id)
-    console.log(id)
+    this.state.evidence.push({"id": id, "choice_id": choice_id})
+    this.setState({modalIsOpen: false})
+    let header = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "App-Id": this.api_data.id,
+      "App-Key": this.api_data.key,
+      "Dev-Mode" : "true"
+    }
+    axios.post('https://api.infermedica.com/v2/diagnosis', {
+      "sex": this.state.gender,
+      "age": this.state.age,
+      "evidence": this.state.evidence
+    }, {
+      headers: header
+    }).then(res=>{
+      console.log(res.data)
+      this.setState({
+        modalData: res.data,
+        modalIsOpen: true
+      })
+    })
   }
   onSexChanged = (event) => {
     this.setState({
