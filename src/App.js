@@ -13,7 +13,11 @@ class App extends React.Component {
   customStyles = {
     content : {
       backgroundColor : 'rgba(240, 240, 240, .95)',
-      height : '50%'
+      height : '50%',
+      width: '50%',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)'
     }
   };
   api_data = env()
