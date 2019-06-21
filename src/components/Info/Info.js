@@ -23,7 +23,7 @@ function Info(props) {
                         <Form.Label>Enter Age:</Form.Label>
                     </div>
                     <div className="col">
-                        <Form.Control type="number" onChange={props.onAgeChanged} placeholder="Enter Age" />
+                        <Form.Control type="number" onChange={props.onAgeChanged} placeholder="Enter Age" value={props.age} />
                     </div>
                 </div>
                 <div className="row my-2">

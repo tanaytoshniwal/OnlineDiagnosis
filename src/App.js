@@ -10,7 +10,7 @@ class App extends React.Component {
     super()
     this.state = {
       gender: 'male',
-      age: 0,
+      age: 16,
       symptoms: [],
       evidence: []
     }
