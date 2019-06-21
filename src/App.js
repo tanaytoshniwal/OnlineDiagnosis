@@ -38,22 +38,31 @@ class App extends React.Component {
     this.state.evidence.push(local_evidence)
   }
   submit = ()=>{
-    let header = {
-      "Content-Type": "application/json",
-      "Accept": "application/json",
-      "App-Id": this.api_data.id,
-      "App-Key": this.api_data.key,
-      "Dev-Mode" : "true"
+    if(this.state.age === 0)
+    {
+      alert('Please Fill the required fields.');
     }
-    axios.post('https://api.infermedica.com/v2/diagnosis', {
-      "sex": this.state.gender,
-      "age": this.state.age,
-      "evidence": this.state.evidence
-    }, {
-      headers: header
-    }).then(res=>{
-      console.log(res.data)
-    })
+    else if(this.state.evidence.length === 0){
+      alert('Please select atleast one symptom!')
+    }
+    else{
+      let header = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "App-Id": this.api_data.id,
+        "App-Key": this.api_data.key,
+        "Dev-Mode" : "true"
+      }
+      axios.post('https://api.infermedica.com/v2/diagnosis', {
+        "sex": this.state.gender,
+        "age": this.state.age,
+        "evidence": this.state.evidence
+      }, {
+        headers: header
+      }).then(res=>{
+        console.log(res.data)
+      })
+    }
   }
   onSexChanged = (event) => {
     this.setState({
@@ -64,7 +73,6 @@ class App extends React.Component {
     this.setState({
       age: event.target.value
     })
-    console.log(this.state.age)
   }
   render(){
     return (
