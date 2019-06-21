@@ -4,15 +4,28 @@ import axios from 'axios';
 import Info from './components/Info/Info';
 import UI from './components/UI/UI';
 import env from './environment';
+import Modal from 'react-modal'
+import Popup from './components/Popup/Popup';
+
+Modal.setAppElement('#root')
+
 class App extends React.Component {
+  customStyles = {
+    content : {
+      backgroundColor : 'rgba(240, 240, 240, .95)',
+      height : '50%'
+    }
+  };
   api_data = env()
   constructor(){
     super()
     this.state = {
       gender: 'male',
-      age: 16,
+      age: 18,
       symptoms: [],
-      evidence: []
+      evidence: [],
+      modalIsOpen: false,
+      modalData: undefined
     }
   }
   componentDidMount(){
@@ -38,13 +51,8 @@ class App extends React.Component {
     this.state.evidence.push(local_evidence)
   }
   submit = ()=>{
-    if(this.state.age === 0)
-    {
-      alert('Please Fill the required fields.');
-    }
-    else if(this.state.evidence.length === 0){
-      alert('Please select atleast one symptom!')
-    }
+    if(this.state.age === 0) alert('Please Fill the required fields.');
+    else if(this.state.evidence.length === 0) alert('Please select atleast one symptom!')
     else{
       let header = {
         "Content-Type": "application/json",
@@ -61,8 +69,19 @@ class App extends React.Component {
         headers: header
       }).then(res=>{
         console.log(res.data)
+        this.setState({
+          modalData: res.data,
+          modalIsOpen: true
+        })
       })
     }
+  }
+  closeModal = () => {
+    this.setState({modalIsOpen: false});
+  }
+  click = (choice_id, id)=>{
+    console.log(choice_id)
+    console.log(id)
   }
   onSexChanged = (event) => {
     this.setState({
@@ -79,6 +98,13 @@ class App extends React.Component {
       <div>
         <Info sex={this.state.gender} gender={this.state.gender} age={this.state.age} onAgeChanged={this.onAgeChanged} onSexChanged={this.onSexChanged} submit={this.submit} />
         <UI symptoms={this.state.symptoms} selected={this.symptomSelected}/>
+        <Modal
+            isOpen={this.state.modalIsOpen}
+            onRequestClose={this.closeModal}
+            style={this.customStyles}
+            contentLabel="Example Modal" >
+                <Popup closeModal={this.closeModal} click={this.click} data={this.state.modalData} className="modal"/>
+        </Modal>
       </div>
     );
   }
