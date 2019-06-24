@@ -18,7 +18,7 @@ class App extends React.Component {
       minWidth: '80%',
       top: '50%',
       left: '50%',
-      transform: 'translate(-50%, -50%)'
+      transform: 'translate(-50%, -35%)'
     }
   };
   api_data = env()
