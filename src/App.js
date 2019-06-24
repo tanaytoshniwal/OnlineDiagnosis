@@ -6,6 +6,7 @@ import UI from './components/UI/UI';
 import env from './environment';
 import Modal from 'react-modal'
 import Popup from './components/Popup/Popup';
+import Searchbar from './components/Searchbar/Searchbar';
 
 Modal.setAppElement('#root')
 
@@ -126,6 +127,7 @@ class App extends React.Component {
     return (
       <div>
         <Info sex={this.state.gender} reset={this.reset} gender={this.state.gender} age={this.state.age} onAgeChanged={this.onAgeChanged} onSexChanged={this.onSexChanged} submit={this.submit} />
+        <Searchbar symptoms={this.state.symptoms} selected={this.symptomSelected}></Searchbar>
         <UI symptoms={this.state.symptoms} selected={this.symptomSelected}/>
         <Modal
             isOpen={this.state.modalIsOpen}
